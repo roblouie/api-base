@@ -1,3 +1,4 @@
 node_modules
 .idea
 config/database-config.js
+config/facebook-config.js

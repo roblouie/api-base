@@ -6,6 +6,7 @@ const passport = require('passport');
 const configurePassport = require('./config/passport-jwt-config');
 const authController = require('./controllers/auth-controller');
 const userController = require('./controllers/user-controller');
+const facebookAuthController = require('./controllers/facebook-auth-controller');
 
 const app = express();
 app.use(passport.initialize());
@@ -15,5 +16,6 @@ app.use(bodyParser.json());
 
 app.use('/auth', authController);
 app.use('/users', userController);
+app.use('/facebook', facebookAuthController);
 
 app.listen(3000);
