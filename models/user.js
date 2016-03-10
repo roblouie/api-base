@@ -11,9 +11,11 @@ module.exports = bookshelf.Model.extend({
     roles() {
         return this.belongsToMany(Role, 'user_role');
     },
+
     validPassword(password) {
         return bcrypt.compareAsync(password, this.attributes.password);
     },
+
     initialize() {
         this.on('saving', model => {
             if (!model.hasChanged('password')) return;

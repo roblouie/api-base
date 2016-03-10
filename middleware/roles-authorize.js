@@ -8,6 +8,7 @@ module.exports = function(...authorizedRoles) {
             res.send('Not permitted');
             return;
         }
+
         next();
     }
 };
