@@ -18,7 +18,7 @@ router.post('/register', function(req, res) {
     const {username, password} = req.body;
     User.forge({username, password}).save()
         .then(() => { return authService.authenticateAndGenerateToken(username, password) })
-        .then(token => res.json({token, success: true}))
+        .then(token => res.json({ token, success: true }))
         .catch(error => {
             if (error.code === 'ER_DUP_ENTRY') {
                 res.json({ error: 'Username already taken', success: false });
