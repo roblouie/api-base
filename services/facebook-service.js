@@ -6,12 +6,6 @@ const Promise = require('bluebird');
 const url = require('url');
 const request = Promise.promisify(require("request"));
 const User = require('../models/user');
-const JWT = require('jwt-async');
-const securityConfig = require('../config/security-config');
-const jwt = Promise.promisifyAll(new JWT());
-Promise.promisifyAll(request);
-
-jwt.setSecret(securityConfig.jwtSecret);
 
 module.exports = {
     loginWithFacebook
