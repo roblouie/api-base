@@ -14,9 +14,11 @@ router.post('/login', (req, res) => {
         .catch(error => res.json({ error: 'Authentication failed', success: false }));
 });
 
-router.post('/register', function(req, res) {
+router.post('/register', (req, res) => {
     const {username, password} = req.body;
+    const USER_ROLE_ID = 2;  //TODO: This should be updated to actually query from the database instead of a hard ID
     User.forge({username, password}).save()
+        .then(user => user.roles().attach([USER_ROLE_ID]))
         .then(() => { return authService.authenticateAndGenerateToken(username, password) })
         .then(token => res.json({ token, success: true }))
         .catch(error => {

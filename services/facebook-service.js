@@ -55,11 +55,13 @@ function findOrCreateUser(userInfo) {
     return User.where('username', userInfo.email).fetch()
         .then(user => {
             if (!user) {
-                //TODO: Save the long lived token to the user, it's not needed for auth but should be there for future fb calls,
-                //TODO: it is already on the userInfo object, it just needs saved to the database
                 return User.forge({
                     username: userInfo.email,
-                    password: uuid.v1()
+                    password: uuid.v1(),
+                    first_name: userInfo.firstName,
+                    last_name: userInfo.lastName,
+                    facebook_id: userInfo.id,
+                    facebook_token: userInfo.longLivedToken
                 }).save()
             }
             return user
