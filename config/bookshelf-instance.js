@@ -1,7 +1,9 @@
 'use strict';
 
-const dbConfig = require('./database-config');
-const knex = require('knex')(dbConfig);
+const dbConfig = require('../knexfile');
+const knex = require('knex')(dbConfig['development']);
+
+knex.migrate.latest();
 
 module.exports = require('bookshelf')(knex);
 
