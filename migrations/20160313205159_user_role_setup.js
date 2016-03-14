@@ -1,6 +1,6 @@
 
 exports.up = function(knex) {
-    return knex.schema.createTable('user', table => {
+    return knex.schema.createTableIfNotExists('user', table => {
         table.increments('id').primary();
         table.string('username').notNullable();
         table.string('password').notNullable();
@@ -8,10 +8,10 @@ exports.up = function(knex) {
         table.string('first_name');
         table.string('last_name');
         table.string('facebook_id');
-    }).createTable('role', table => {
+    }).createTableIfNotExists('role', table => {
         table.increments('id').primary();
         table.string('name');
-    }).createTable('user_role', table => {
+    }).createTableIfNotExists('user_role', table => {
         table.integer('user_id').unsigned().references('user.id');
         table.integer('role_id').unsigned().references('role.id');
     });
